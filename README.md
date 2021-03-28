@@ -1,10 +1,9 @@
-# Workshop Goals
+# Workshop 2 Goals
 
-- Create an initial React project using CRA Framework
-- Understand the main component of an initial React app
-- Create React components
-- Create an example of a component life cycle.
-- Manage state component
-- Manipulate Styled-components
-- Apply Routing to our app
-- Add lazy loading to existent components
+- Understand the concept of Hooks
+- Use functional components instead of class components
+- Create an example of basic hooks (useState, useEffect and useContext)
+- Create an example of a component life cycle using hooks.
+- Manage component state using Hooks.
+- Create a custom Hook
+- Manage CRUD operations using Formik and Yup.
