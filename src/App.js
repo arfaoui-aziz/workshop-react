@@ -1,16 +1,24 @@
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
+import { fetchProducts } from "./redux/slices/productsSlice";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import Header from "./components/Header";
 import { UserContext } from "./contexts/UserContext";
 import UpdateProduct from "./components/UpdateProduct";
+import AddProduct from "./components/AddProduct";
 const Welcome = React.lazy(() => import("./pages/Welcome"));
 const Products = React.lazy(() => import("./pages/Products"));
 const ProductDetails = React.lazy(() => import("./pages/ProductDetails"));
+
 //***********************/
 function App() {
   const [connectedUser, setConnectedUser] = useState(null);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
 
   return (
     <>
@@ -28,6 +36,10 @@ function App() {
                   <Route
                     path="/products"
                     render={(props) => <Products {...props} />}
+                  ></Route>
+                  <Route
+                    path="/addProduct"
+                    render={(props) => <AddProduct {...props} />}
                   ></Route>
                   <Route
                     path="/product/:name"
@@ -61,6 +73,10 @@ function App() {
                   <Route
                     path="/update/:id"
                     render={(props) => <UpdateProduct {...props} />}
+                  ></Route>
+                  <Route
+                    path="/addProduct"
+                    render={(props) => <AddProduct {...props} />}
                   ></Route>
                   <Route
                     exact

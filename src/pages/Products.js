@@ -3,24 +3,16 @@ import styled from "styled-components";
 import ProductFunc from "../components/ProductFunc";
 import { useApi } from "../hooks/useApi";
 import { queryApi } from "../utils/queryApi";
+import { useSelector } from "react-redux";
+import { selectProducts } from "../redux/slices/productsSlice";
 //**************************************** */
 export default function Products() {
-  const [products, err, reload] = useApi("products");
-  const deleteProduct = async (id) => {
-    const [err] = await queryApi("product/" + id, {}, "DELETE");
-    if (err) {
-      console.log(err);
-    } else await reload();
-  };
+  const [products, err] = useSelector(selectProducts);
   return (
     <ProductsWrapper>
       {err && <Errors>{err}</Errors>}
       {products?.map((product, index) => (
-        <ProductFunc
-          product={product}
-          deleteProduct={deleteProduct}
-          key={index}
-        ></ProductFunc>
+        <ProductFunc product={product} key={index}></ProductFunc>
       ))}
     </ProductsWrapper>
   );
